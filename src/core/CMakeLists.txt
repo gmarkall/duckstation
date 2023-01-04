@@ -173,6 +173,12 @@ elseif(${CPU_ARCH} STREQUAL "aarch64")
   )
   target_link_libraries(core PUBLIC vixl)
   message("Building AArch64 recompiler")
+elseif(${CPU_ARCH} STREQUAL "riscv64")
+  target_compile_definitions(core PUBLIC "WITH_RECOMPILER=1")
+  target_sources(core PRIVATE ${RECOMPILER_SRCS}
+    cpu_recompiler_code_generator_riscv64.cpp
+  )
+  message("Building riscv64 recompiler")
 else()
   message("Not building recompiler")
 endif()

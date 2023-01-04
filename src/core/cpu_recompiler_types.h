@@ -130,6 +130,26 @@ constexpr u32 MAX_FAR_HOST_BYTES_PER_INSTRUCTION = 128;
 // Alignment of code stoarge.
 constexpr u32 CODE_STORAGE_ALIGNMENT = 4096;
 
+#elif defined(CPU_RISCV64)
+
+using HostReg = unsigned;
+using CodeEmitter = unsigned;
+using LabelType = unsigned;
+
+enum : u32
+{
+  HostReg_Count = 32
+};
+constexpr HostReg HostReg_Invalid = static_cast<HostReg>(HostReg_Count);
+constexpr RegSize HostPointerSize = RegSize_64;
+
+// Alignment of code storage.
+constexpr u32 CODE_STORAGE_ALIGNMENT = 4096;
+
+// A reasonable "maximum" number of bytes per instruction.
+constexpr u32 MAX_NEAR_HOST_BYTES_PER_INSTRUCTION = 64;
+constexpr u32 MAX_FAR_HOST_BYTES_PER_INSTRUCTION = 128;
+
 #else
 
 using HostReg = int;
